@@ -3,6 +3,7 @@ package flipkart.base;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,15 +12,24 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-
+import org.testng.annotations.BeforeClass;
+import flipkart.OR.OR;
+import flipkart.Pages.HomePage;
 import flipkart.constants.Constants;
 
-public class Base {
+public class Base implements OR {
 	
 	public static WebDriver driver;
+	public Base base;
+	public HomePage homePage; 
+	private WebDriverWait wait;
+	Logger log=Logger.getLogger(Base.class);
+	{
+		wait = new WebDriverWait(driver, 60);
+		base = new Base();
+	}
 	
-	@BeforeTest
+	@BeforeClass
 	public void openBrowser()
 	{
 		try
@@ -28,6 +38,8 @@ public class Base {
 		if(Constants.Browser.equalsIgnoreCase("chrome"))
 		{
 			driver = new ChromeDriver();
+			System.out.println("chrome opened");
+			log.debug("Chrome Opened");
 		}
 		else if (Constants.Browser.equalsIgnoreCase("firefox"))
 		{
@@ -47,19 +59,19 @@ public class Base {
 		}
 	}
 	
-	public static WebElement findElement(By by)
+	public WebElement findElement(By by)
 	{
 		
 	return driver.findElement(by); 
 	}
 	
-	public static void type(By locator,String input)
+	public  void type(By locator,String input)
 	{
 		System.out.println("type function working");
 		findElement(locator).sendKeys(input);
 	}
 	
-	public static void Click(By locator)
+	public void Click(By locator)
 	{
 		findElement(locator).click();
 	}
@@ -70,10 +82,18 @@ public class Base {
 		driver.quit();
 	}
 	
-	public static void elementTobeVisible(By locator)
+	public void elementTobeVisible(By locator)
 	{
-		WebDriverWait wait = new WebDriverWait(driver, 60);
+		
 		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+		WebElement element=driver.findElement(locator);
+		wait.until(ExpectedConditions.visibilityOf(element));
+		
+		if(locator.toString().contains("link"))
+		{
+			wait.until(ExpectedConditions.elementToBeClickable(element));
+		}
+		
 	}
 	
 	public static ArrayList<WebElement> findElements(By locator)

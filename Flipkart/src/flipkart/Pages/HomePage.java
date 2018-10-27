@@ -1,19 +1,23 @@
 package flipkart.Pages;
 
-import org.openqa.selenium.By;
-
+import org.apache.log4j.Logger;
 import flipkart.base.Base;
+
 
 public class HomePage extends Base {
 
-	Base b=new Base();
-	By username=By.xpath("//div[@class='_2cyQi_']");
-	
+	Logger log=Logger.getLogger(HomePage.class);
 	
 	public void verifyLoggedInUser()
 	{
-		Base.elementTobeVisible(username);
+		
 //		System.out.println(b.get_Attribute("Electronics", "Mi"));
+	}
+	
+	public void verifyPopUp()
+	{
+		base.elementTobeVisible(newToFlipkart_link);
+		log.debug(newToFlipkart_link+ "is visible verified");
 	}
 	
 	
