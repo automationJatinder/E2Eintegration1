@@ -1,28 +1,26 @@
 package flipkart.testcases;
 
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.testng.annotations.Test;
+
+import flipkart.OR.OR;
+import flipkart.Pages.LoginPage;
 import flipkart.base.Base;
 
-public class TC_01_VerifyTitle extends Base {
+public class TC_01_VerifyTitle extends Base implements OR{
 
 	
 	@Test
 	public void verifyTitle() throws InterruptedException 
 	{
-//		login.loginFlipkart();
-//		home.verifyLoggedInUser();
-//		click_Menu("Electronics", "Mi");
-		
-//		By email_txt1 = By.xpath("//input[@class='_2zrpKA']");
-//		if(email_txt1.toString().contains("link"))
-//		{
-//			System.out.println("clickable");
-//		}
-//		else
-//		{
-//			System.out.println("not");
-//		}
+		waitUntilPresence(By.xpath("//div[@class='_39M2dM']/input[@class='_2zrpKA']"));
+		driver.findElement(By.xpath("//div[@class='_39M2dM']/input[@class='_2zrpKA']")).sendKeys(Keys.ESCAPE);
+		click_Menu("Men", "Jackets");
+		Click(By.xpath("//*[a='Login & Signup']"));
+		type(By.xpath("//div[@class='_39M2dM']/input[@class='_2zrpKA']"),"7834840555");
+		type(By.xpath("//input[@type='password']"),"Khalsa@13");
+		Click(By.xpath("//button[@class='_2AkmmA _1LctnI _7UHT_c']"));
 	}
-	
-	
 }

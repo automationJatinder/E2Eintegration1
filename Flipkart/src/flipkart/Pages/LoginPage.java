@@ -1,6 +1,10 @@
 package flipkart.Pages;
 
-public class LoginPage {
+import flipkart.OR.OR;
+import flipkart.base.Base;
+import flipkart.base.BasePage;
+
+public class LoginPage extends Base implements OR, BasePage {
 	
 	
 //	By login_username = By.xpath("//input[@class='_2zrpKA']");
@@ -10,7 +14,17 @@ public class LoginPage {
 	
 	public void loginFlipkart()
 	{
+		System.out.println(" in loginFlipkart");
 		
+		if(driver==null)
+		{
+			System.out.println("driver null");
+		}
+		else
+		{
+			System.out.println("driver not null");
+		}
+		type(email_txt, "adas@asds.com");
 	}
 
 }

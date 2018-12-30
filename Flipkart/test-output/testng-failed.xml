@@ -6,6 +6,7 @@
       <class name="flipkart.testcases.TC_01_VerifyTitle">
         <methods>
           <include name="verifyTitle"/>
+          <include name="befSuite"/>
           <include name="openBrowser"/>
         </methods>
       </class> <!-- flipkart.testcases.TC_01_VerifyTitle -->
